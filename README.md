@@ -62,7 +62,7 @@ docker run -d -p 8080:8080 -p 8754:8754 \
 	--tmpfs /run:exec,size=32M \
 	--tmpfs /planefinder/log:exec,size=32M \
 	--tmpfs /usr/lib/fr24/public_html/data:size=32M \
-	thomx/fr24feed-piaware
+	leowongco/fr24feed-piaware
 ```
 
 Go to http://dockerhost:8080 to view a map of received data.
@@ -107,7 +107,7 @@ docker run -it --rm \
 	-e 'SERVICE_ENABLE_HTTP=false' \
 	-e 'SERVICE_ENABLE_FR24FEED=false' \
 	-e 'SERVICE_ENABLE_PIAWARE=false' \
-	thomx/fr24feed-piaware /usr/bin/piaware -plainlog
+	leowongco/fr24feed-piaware /usr/bin/piaware -plainlog
 ```
 
 When the container starts you should see the feeder id, note it. Wait 5 minutes and you should see a new receiver at https://fr.flightaware.com/adsb/piaware/claim (use the same IP as your docker host), claim it and exit the container.
@@ -133,7 +133,7 @@ docker run -it --rm \
 	-e 'SERVICE_ENABLE_HTTP=false' \
 	-e 'SERVICE_ENABLE_PIAWARE=false' \
 	-e 'SERVICE_ENABLE_FR24FEED=false' \
-	thomx/fr24feed-piaware /bin/bash
+	leowongco/fr24feed-piaware /bin/bash
 ```
 
 Then : `/fr24feed/fr24feed/fr24feed --signup` and follow the instructions. For technical steps, your answer doesn't matter. We just need the sharing key at the end.
@@ -237,7 +237,7 @@ docker run -it --rm \
 	-e 'SERVICE_ENABLE_HTTP=false' \
 	-e 'SERVICE_ENABLE_PIAWARE=false' \
 	-e 'SERVICE_ENABLE_FR24FEED=false' \
-	thomx/fr24feed-piaware /planefinder/pfclient
+	leowongco/fr24feed-piaware /planefinder/pfclient
 ```
 
 Once the container has started, you should see a message such as:
@@ -278,7 +278,7 @@ docker run -it --rm \
 	-e 'OPENSKY_USERNAME=OpenskyUsername' \
 	-e 'HTML_SITE_LAT=45' \
 	-e 'HTML_SITE_LON=9' \
-	thomx/fr24feed-piaware /bin/bash
+	leowongco/fr24feed-piaware /bin/bash
 ```
 
 Once the container has started, you should see a message such as:
@@ -325,7 +325,7 @@ docker run -it --rm \
 	-e 'HTML_SITE_LAT=45' \
 	-e 'HTML_SITE_LON=9' \
 	-e 'HTML_SITE_ALT=0' \
-	thomx/fr24feed-piaware /bin/bash
+	leowongco/fr24feed-piaware /bin/bash
 ```
 
 Once the container has started, you should see a message such as:
