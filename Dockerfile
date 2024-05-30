@@ -265,7 +265,7 @@ ADD build /copy_root/build
 FROM debian:bullseye-slim as serve
 
 ENV DEBIAN_VERSION bullseye
-ENV RTL_SDR_VERSION 0.6.0
+ENV RTL_SDR_VERSION 2.0.1
 
 ENV FR24FEED_AMD64_VERSION 1.0.44-0
 ENV FR24FEED_ARMHF_VERSION 1.0.44-0
@@ -357,14 +357,13 @@ RUN dpkg --add-architecture armhf && \
     # RTL-SDR
     cd /tmp && \
     mkdir -p /etc/modprobe.d && \
-    echo 'blacklist r820t' >> /etc/modprobe.d/raspi-blacklist.conf && \
-    echo 'blacklist rtl2832' >> /etc/modprobe.d/raspi-blacklist.conf && \
-    echo 'blacklist rtl2830' >> /etc/modprobe.d/raspi-blacklist.conf && \
     echo 'blacklist dvb_usb_rtl28xxu' >> /etc/modprobe.d/raspi-blacklist.conf && \
-    git clone -b ${RTL_SDR_VERSION} --depth 1 https://github.com/osmocom/rtl-sdr.git && \
+    apt-get install libusb-1.0-0-dev git cmake pkg-config && \
+    git clone https://github.com/rtlsdrblog/rtl-sdr-blog && \
+    cd rtl-sdr-blog && \
     mkdir rtl-sdr/build && \
     cd rtl-sdr/build && \
-    cmake ../ -DINSTALL_UDEV_RULES=ON -DDETACH_KERNEL_DRIVER=ON && \
+    cmake ../ -DINSTALL_UDEV_RULES=ON && \
     make && \
     make install && \
     ldconfig && \
